@@ -4,7 +4,7 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 <title>Failed payment notice</title>
-<meta name="description" content="How Chekin warns a customer for 14 days when their subscription payment fails: banner, pop-up, payment screen and 8 emails.">
+<meta name="description" content="How Chekin reminds annual customers before renewal and warns them for 14 days when a subscription payment fails.">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Figtree:wght@400;500;600;700;800&family=JetBrains+Mono:wght@500;600&display=swap" rel="stylesheet">
@@ -14,7 +14,7 @@
     --bg:#f7f7fc; --paper:#ffffff; --ink:#161643; --ink2:#5c5c88; --line:#e4e4f0; --soft:#eeeff8;
     --blue:#385bf8; --amber:#ffb700; --amber-ink:#8a5200; --amber-soft:#fff3db;
     --red:#df0044; --red-ink:#b0003a; --red-soft:#ffe5ed; --grey:#7c7ca0; --grey-soft:#ececf4;
-    --green:#0f9f80; --green-ink:#0b7a62; --green-soft:#dff6ef;
+    --green:#0f9f80; --green-ink:#0b7a62; --green-soft:#dff6ef; --blue-soft:#eef1ff; --blue-ink:#2a44c9;
     --shade:rgba(10,10,40,.86);
     --font:'Figtree',-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;
     --mono:'JetBrains Mono',ui-monospace,'SF Mono',Menlo,monospace;
@@ -23,13 +23,13 @@
     --bg:#10102a; --paper:#191938; --ink:#ececfa; --ink2:#a6a6cc; --line:#2b2b50; --soft:#21213f;
     --blue:#7d93ff; --amber:#ffc23d; --amber-ink:#ffcf6b; --amber-soft:#3a2e12;
     --red:#ff4d7d; --red-ink:#ff7d9f; --red-soft:#3d1527; --grey:#9a9ac0; --grey-soft:#25254a;
-    --green:#3fd6ae; --green-ink:#5fe0bd; --green-soft:#123a31;
+    --green:#3fd6ae; --green-ink:#5fe0bd; --green-soft:#123a31; --blue-soft:#1f2650; --blue-ink:#a9b6ff;
     --shade:rgba(4,4,16,.92); color-scheme:dark}}
   :root[data-theme="dark"]{
     --bg:#10102a; --paper:#191938; --ink:#ececfa; --ink2:#a6a6cc; --line:#2b2b50; --soft:#21213f;
     --blue:#7d93ff; --amber:#ffc23d; --amber-ink:#ffcf6b; --amber-soft:#3a2e12;
     --red:#ff4d7d; --red-ink:#ff7d9f; --red-soft:#3d1527; --grey:#9a9ac0; --grey-soft:#25254a;
-    --green:#3fd6ae; --green-ink:#5fe0bd; --green-soft:#123a31;
+    --green:#3fd6ae; --green-ink:#5fe0bd; --green-soft:#123a31; --blue-soft:#1f2650; --blue-ink:#a9b6ff;
     --shade:rgba(4,4,16,.92); color-scheme:dark}
 
   *{box-sizing:border-box}
@@ -95,6 +95,9 @@
   .p-red{background:var(--red-soft);color:var(--red-ink)}
   .p-grey{background:var(--grey-soft);color:var(--ink2)}
   .p-green{background:var(--green-soft);color:var(--green-ink)}
+  .p-blue{background:var(--blue-soft);color:var(--blue-ink)}
+  .phase-sep{display:flex;align-items:center;gap:12px;font-size:13px;font-weight:700;color:var(--ink2);padding:6px 4px 0}
+  .phase-sep::before,.phase-sep::after{content:"";flex:1;height:1px;background:var(--line)}
   .ph-head h2{font-size:23px;font-weight:800;letter-spacing:-.015em;line-height:1.2}
   .ph-head p{margin:0;color:var(--ink2);font-size:15px}
   .ph-head ul{margin:0;padding:0;list-style:none;display:flex;flex-direction:column;gap:6px;font-size:14.5px}
@@ -165,7 +168,7 @@
   <header>
     <div class="eyebrow">Chekin · Billing · November 2026</div>
     <h1>Failed payment notice</h1>
-    <p>When we can’t charge a subscription, we warn the customer for 14 days so they can update their card before losing access.</p>
+    <p>When we can’t charge a subscription, we warn the customer for 14 days so they can update their card before losing access. On annual plans, we also give them a heads-up before the renewal.</p>
   </header>
 
   <div class="keys">
@@ -205,6 +208,26 @@
   </section>
 
   <div class="phases">
+
+    <section class="phase">
+      <div class="ph-head">
+        <span class="pill p-blue">BEFORE RENEWAL</span>
+        <h2>Renewal notice</h2>
+        <p>Before charging an annual plan, we remind the customer it’s about to renew and ask them to check their payment method. Nothing has failed yet, so the tone is friendly and blue.</p>
+        <ul>
+          <li>Emails 7 days and 1 day before</li>
+          <li>Blue banner from 7 days before, can be closed</li>
+          <li>No pop-up; only the account owner sees it</li>
+        </ul>
+      </div>
+      <div class="tiles">
+        <button class="tile fit wide" data-src="img/renew-banner.png" data-title="Renewal banner" data-note="From 7 days before until the charge · Blue, can be closed · Button: Review payment method"><span class="frame"><img src="img/renew-banner.png" alt="Blue banner: Your annual plan renews in 7 days, on 10 Dec"></span><span class="cap"><b>Banner</b>“Your annual plan renews in 7 days”</span></button>
+        <button class="tile top" data-src="img/email-R1.png" data-title="R1 · Your Chekin annual plan renews on 10 Dec" data-note="7 days before · Button: Review payment method" data-tall><span class="frame"><img src="img/email-R1.png" alt="Email R1"></span><span class="cap"><b>Email R1 · 7 days before</b>Your plan renews soon</span></button>
+        <button class="tile top" data-src="img/email-R2.png" data-title="R2 · Your Chekin plan renews tomorrow" data-note="1 day before · Button: Review payment method" data-tall><span class="frame"><img src="img/email-R2.png" alt="Email R2"></span><span class="cap"><b>Email R2 · 1 day before</b>Renews tomorrow</span></button>
+      </div>
+    </section>
+
+    <div class="phase-sep">If the charge fails, the failed payment notice starts</div>
 
     <section class="phase">
       <div class="ph-head">
